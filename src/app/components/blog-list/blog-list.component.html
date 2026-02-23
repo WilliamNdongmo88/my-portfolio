@@ -1,0 +1,106 @@
+<app-header></app-header>
+<div class="blog-container">
+    <!-- Header -->
+    <div class="blog-header">
+    <h1 class="text-5xl font-bold mb-4">📝 Blog & Expériences</h1>
+    <p class="text-xl text-gray-300">Articles sur le développement, Salesforce, et les meilleures pratiques</p>
+    </div>
+
+    <!-- Recherche et Filtres -->
+    <div class="search-filter-section">
+    <div class="search-box">
+        <input
+        type="text"
+        placeholder="🔍 Rechercher des articles..."
+        [(ngModel)]="searchQuery"
+        (ngModelChange)="onSearch()"
+        class="search-input"
+        />
+    </div>
+
+    <div class="filter-tags">
+        <button
+        class="filter-btn"
+        [class.active]="selectedCategory === ''"
+        (click)="filterByCategory('')"
+        >
+        Tous
+        </button>
+        <button
+        *ngFor="let category of categories"
+        class="filter-btn"
+        [class.active]="selectedCategory === category"
+        (click)="filterByCategory(category)"
+        >
+        {{ category }}
+        </button>
+    </div>
+    </div>
+
+    <!-- Articles en vedette -->
+    <div *ngIf="!searchQuery && selectedCategory === ''" class="featured-section">
+    <h2 class="text-3xl font-bold mb-6 text-amber-400">⭐ Articles en vedette</h2>
+    <div class="featured-grid">
+        <div *ngFor="let article of featuredArticles" class="featured-card">
+        <div class="featured-image">
+            <img [src]="article.image" [alt]="article.title" />
+        </div>
+        <div class="featured-content">
+            <span class="category-badge">{{ article.category }}</span>
+            <h3 class="text-2xl font-bold mb-2">{{ article.title }}</h3>
+            <p class="text-gray-300 mb-4">{{ article.excerpt }}</p>
+            <div class="article-meta">
+            <span class="read-time">⏱️ {{ article.readTime }} min de lecture</span>
+            <span class="date">📅 {{ article.date | date:'d MMM yyyy' }}</span>
+            </div>
+            <button (click)="viewArticle(article.id)" class="read-btn">Lire l'article</button>
+        </div>
+        </div>
+    </div>
+    </div>
+
+    <!-- Liste des articles -->
+    <div class="articles-section">
+    <h2 class="text-3xl font-bold mb-6" [class.text-amber-400]="!searchQuery && selectedCategory === ''">
+        {{ searchQuery ? '🔎 Résultats de recherche' : selectedCategory ? selectedCategory : '📚 Tous les articles' }}
+    </h2>
+
+    <div *ngIf="filteredArticles.length === 0" class="no-articles">
+        <p class="text-xl text-gray-400">Aucun article trouvé. Essayez une autre recherche ou catégorie.</p>
+    </div>
+
+    <div class="articles-grid">
+        <article *ngFor="let article of filteredArticles" class="article-card" (click)="viewArticle(article.id)">
+        <div class="article-image">
+            <img [src]="article.image" [alt]="article.title" />
+            <span class="category-badge">{{ article.category }}</span>
+        </div>
+        <div class="article-body">
+            <h3 class="text-xl font-bold mb-2">{{ article.title }}</h3>
+            <p class="text-gray-300 mb-4 line-clamp-2">{{ article.excerpt }}</p>
+
+            <div class="tags">
+            <span *ngFor="let tag of article.tags.slice(0, 3)" class="tag">{{ tag }}</span>
+            <span *ngIf="article.tags.length > 3" class="tag">+{{ article.tags.length - 3 }}</span>
+            </div>
+
+            <div class="article-footer">
+            <div class="meta-info">
+                <span class="read-time">⏱️ {{ article.readTime }} min</span>
+                <span class="date">{{ article.date | date:'d MMM' }}</span>
+            </div>
+            <button class="read-more">Lire →</button>
+            </div>
+        </div>
+        </article>
+    </div>
+    </div>
+
+    <!-- Pagination ou "Charger plus" -->
+    <div class="load-more-section" *ngIf="filteredArticles.length > 0">
+    <button class="btn-load-more" (click)="loadMore()">
+        Charger plus d'articles
+    </button>
+    </div>
+</div>
+<app-footer></app-footer>

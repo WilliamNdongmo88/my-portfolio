@@ -1,0 +1,73 @@
+<app-header></app-header>
+<div class="article-detail-container" *ngIf="article">
+    <!-- Back Button -->
+    <button class="back-btn" (click)="goBack()">← Retour aux articles</button>
+
+    <!-- Article Header -->
+    <header class="article-header">
+    <span class="category-badge">{{ article.category }}</span>
+    <h1 class="article-title">{{ article.title }}</h1>
+    <div class="article-meta">
+        <span class="author">👤 {{ article.author }}</span>
+        <span class="date">📅 {{ article.date | date:'d MMMM yyyy' }}</span>
+        <span class="read-time">⏱️ {{ article.readTime }} min de lecture</span>
+    </div>
+    </header>
+
+    <!-- Featured Image -->
+    <div class="article-featured-image">
+    <img [src]="article.image" [alt]="article.title" />
+    </div>
+
+    <!-- Article Content -->
+    <article class="article-content">
+    <p class="article-excerpt">{{ article.excerpt }}</p>
+    <div class="article-body" [innerHTML]="article.content"></div>
+    </article>
+
+    <!-- Tags -->
+    <div class="article-tags">
+    <span *ngFor="let tag of article.tags" class="tag">{{ tag }}</span>
+    </div>
+
+    <!-- Related Articles -->
+    <section class="related-articles" *ngIf="relatedArticles.length > 0">
+    <h2>📚 Articles similaires</h2>
+    <div class="related-grid">
+        <article *ngFor="let related of relatedArticles" class="related-card" (click)="viewArticle(related.id)">
+        <div class="related-image">
+            <img [src]="related.image" [alt]="related.title" />
+        </div>
+        <div class="related-body">
+            <h3>{{ related.title }}</h3>
+            <p>{{ related.excerpt }}</p>
+            <span class="read-more">Lire →</span>
+        </div>
+        </article>
+    </div>
+    </section>
+
+    <!-- Navigation -->
+    <div class="article-navigation" *ngIf="previousArticle || nextArticle">
+    <button
+        *ngIf="previousArticle"
+        class="nav-btn prev"
+        (click)="viewArticle(previousArticle!.id)"
+    >
+        ← {{ previousArticle.title }}
+    </button>
+    <button
+        *ngIf="nextArticle"
+        class="nav-btn next"
+        (click)="viewArticle(nextArticle!.id)"
+    >
+        {{ nextArticle.title }} →
+    </button>
+    </div>
+</div>
+
+<div class="article-not-found" *ngIf="!article">
+    <h2>Article non trouvé</h2>
+    <p>L'article que vous recherchez n'existe pas.</p>
+    <button (click)="goBack()">Retour aux articles</button>
+</div>
