@@ -67,7 +67,7 @@ import { CommonModule } from '@angular/common';
         font-size: 1.5rem;
       }
       .about-section {
-        padding: 0 0 3rem 0;
+        padding: 3rem 0 3rem 0;
       }
     }
   `]
