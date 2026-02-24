@@ -14,7 +14,7 @@ import { CommonModule } from '@angular/common';
             Je suis un développeur passionné par la création de solutions web modernes et performantes. Spécialisé dans l'écosystème Salesforce avec une expertise approfondie en Apex, Lightning Web Components et Flows, je complète cette expertise par une solide maîtrise du développement Fullstack.
           </p>
           <p>
-            Mon parcours inclut 3 ans d'expérience directe chez Noeli Ets et Accenture, où j'ai développé des solutions personnalisées sur Salesforce. Actuellement, je travaille à temps partiel en tant que développeur Java/Spring Boot, NodeJs/Express et Angular chez DateCenter, où je conçois et implémente des APIs REST sécurisées avec JWT et OAuth2.
+            Mon parcours inclut une expérience professionnelle chez Noeli Ets et Accenture, où j’ai développé des solutions personnalisées sur Salesforce. Actuellement, je travaille à temps partiel en tant que développeur Java/Spring Boot, NodeJs/Express et Angular chez DateCenter, où je conçois et implémente des APIs REST sécurisées avec JWT et OAuth2.
           </p>
           <p>
             Je suis certifié Salesforce Platform Developer et JavaScript Developer, et je maîtrise les méthodologies Agile (Scrum) ainsi que les outils DevOps modernes comme Docker et CI/CD.

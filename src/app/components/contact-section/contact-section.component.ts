@@ -20,7 +20,7 @@ import { RouterLink } from "@angular/router";
             <a href="https://github.com/WilliamNdongmo88" target="_blank" class="btn btn-violet">
               GitHub
             </a>
-            <a href="https://linkedin.com" target="_blank" class="btn btn-blue">
+            <a href="https://www.linkedin.com/in/william-ndongmo-bbab07218/" target="_blank" class="btn btn-blue">
               LinkedIn
             </a>
           </div>
