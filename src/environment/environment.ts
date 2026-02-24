@@ -1,5 +1,5 @@
 export const environment = {
-  production: false, // Change to true to activate production environment
+  production: true, // Change to true to activate production environment
   apiUrlDev: 'http://localhost:3000/api',
   // apiUrlProd:'https://smart-invites-production.up.railway.app/api',
   apiUrlProd:'https://api.smart-invite.com/api'
