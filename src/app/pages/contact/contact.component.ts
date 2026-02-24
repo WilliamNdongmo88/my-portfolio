@@ -1,8 +1,10 @@
-import { Component } from '@angular/core';
+import { Component, NgZone } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HeaderComponent } from '../../components/header/header.component';
 import { FooterComponent } from '../../components/footer/footer.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, NgForm } from '@angular/forms';
+import { ContactService } from '../../services/contact.service';
+import { timer } from 'rxjs';
 
 @Component({
   selector: 'app-contact',
@@ -24,43 +26,48 @@ export class ContactComponent {
   submitError = false;
   submitted = false;
 
+  constructor(private contactService: ContactService, private ngZone: NgZone) {}
+
   isValidEmail(email: string): boolean {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     return emailRegex.test(email);
   }
 
-  onSubmit() {
+  onSubmit(form: NgForm): void {
+    console.log('Formulaire soumis avec les données :', this.formData);
+    
     this.submitted = true;
+    this.submitSuccess = false;
+    this.submitError = false;
 
-    // Validation
-    if (!this.formData.name || !this.formData.email || !this.formData.subject || !this.formData.message) {
-      return;
-    }
-
-    if (!this.isValidEmail(this.formData.email)) {
-      return;
-    }
-
-    if (this.formData.message.length < 10) {
+    if (!this.formData.name || !this.formData.email ||
+      !this.formData.subject || !this.formData.message ||
+      !this.isValidEmail(this.formData.email) || this.formData.message.length < 10
+    ) {
       return;
     }
 
     this.isSubmitting = true;
-    this.submitSuccess = false;
-    this.submitError = false;
 
-    // Simuler l'envoi du message
-    setTimeout(() => {
-      console.log('Formulaire soumis:', this.formData);
-      this.isSubmitting = false;
-      this.submitSuccess = true;
-      this.formData = { name: '', email: '', subject: '', message: '' };
-      this.submitted = false;
-
-      // Masquer le message de succès après 5 secondes
-      setTimeout(() => {
-        this.submitSuccess = false;
-      }, 5000);
-    }, 1500);
+    this.contactService.send(this.formData)
+      .subscribe({
+        next: (response) => {
+          console.log('response: ', response);
+          form.resetForm();
+          this.formData = { name: '', email: '', subject: '', message: '' };
+          this.submitted = false;
+          this.isSubmitting = false;
+          this.submitSuccess = true;
+          timer(2000).subscribe(() => {
+            this.submitSuccess = false;
+          });
+        },
+        error: (error) => {
+          console.error('Erreur lors de l\'envoi du message', error);
+          this.isSubmitting = false;
+          this.submitError = true;
+          setTimeout(() => this.submitError = false, 5000);
+        }
+      });
   }
 }
