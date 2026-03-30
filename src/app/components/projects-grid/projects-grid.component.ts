@@ -49,7 +49,7 @@ export class ProjectsGridComponent {
       color: '#ec4899',
       technologies: [
         { name: 'Angular 19', color: '#ec4899' },
-        { name: 'Node.js', color: '#4ade80' },
+        { name: 'Java/Spring', color: '#4ade80' },
         { name: 'MySQL', color: '#60a5fa' }
       ],
       codeLink: 'https://github.com/WilliamNdongmo88/angular-artisan-des-saveurs',
