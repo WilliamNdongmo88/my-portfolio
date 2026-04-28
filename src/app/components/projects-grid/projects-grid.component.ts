@@ -29,7 +29,7 @@ export class ProjectsGridComponent {
         { name: 'Firebase', color: '#fb923c' }
       ],
       codeLink: 'https://github.com/WilliamNdongmo88/smart-invites-frontend',
-      demoLink: 'https://smart-invite.com'
+      demoLink: 'https://www.smart-invite.com/'
     },
     {
       title: 'Sol Solution QRCode',
@@ -41,7 +41,7 @@ export class ProjectsGridComponent {
         { name: 'Brevo API', color: '#eab308' }
       ],
       codeLink: 'https://github.com/WilliamNdongmo88/sol-solution-qrcode',
-      demoLink: 'https://sol-solution-qrcode.vercel.app'
+      demoLink: 'https://www.sol-solution-qrcode.vercel.app'
     },
     {
       title: 'Artisan des Saveurs',
